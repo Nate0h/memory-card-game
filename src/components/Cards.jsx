@@ -10,11 +10,13 @@ function Cards() {
     { id: 5, character: "Krillin" },
   ];
   const [curr, setCurr] = useState(0);
+  const [best, setBest] = useState(0);
   const [selected, setSelected] = useState([]);
   let currArray = [];
 
   if (curr == cards.length) {
     alert("You win");
+    setBest(0);
     setCurr(0);
     setSelected([]);
   }
@@ -62,12 +64,16 @@ function Cards() {
       setSelected([]);
     } else {
       setSelected([...selected, card.id]);
-      setCurr(curr + 1);
+      setCurr((curr) => curr + 1);
+      if (curr >= best) {
+        setBest((curr) => curr + 1);
+      }
     }
   }
   return (
     <div>
-      <div>{curr}</div>
+      <div>Best Score: {best}</div>
+      <div>Current Score: {curr}</div>
       {getXRandom(cards)}
       <div></div>
 
