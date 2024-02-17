@@ -1,18 +1,42 @@
 import { useState } from "react";
-
+import { useEffect } from "react";
 function Cards() {
+  const apiKey = "sqn6kfwMf3k9Lc9yoWZBsHkh8VHHDQ9E";
+
   const cards = [
-    { id: 0, character: "Goku" },
-    { id: 1, character: "Vegeta" },
-    { id: 2, character: "Gohan" },
-    { id: 3, character: "Trunks" },
-    { id: 4, character: "Piccolo" },
-    { id: 5, character: "Krillin" },
+    { id: 0, character: "Goku", endPoint: "bLy8cwoobMGx1uDHkO" },
+    { id: 1, character: "Vegeta", endPoint: "bLy8cwoobMGx1uDHkO" },
+    { id: 2, character: "Gohan", endPoint: "bLy8cwoobMGx1uDHkO" },
+    { id: 3, character: "Trunks", endPoint: "bLy8cwoobMGx1uDHkO" },
+    { id: 4, character: "Piccolo", endPoint: "bLy8cwoobMGx1uDHkO" },
+    { id: 5, character: "Krillin", endPoint: "bLy8cwoobMGx1uDHkO" },
   ];
+  const currArray = [];
   const [curr, setCurr] = useState(0);
   const [best, setBest] = useState(0);
   const [selected, setSelected] = useState([]);
-  let currArray = [];
+  const [showCards, setShowCards] = useState([]);
+
+  shuffleCards(cards);
+  useEffect(() => {
+    async function fetchData() {
+      let randomCards = await Promise.all(
+        currArray.map(async (id) => {
+          let newUrl = `https://api.giphy.com/v1/gifs/${cards[id].endPoint}?api_key=sqn6kfwMf3k9Lc9yoWZBsHkh8VHHDQ9E&rating=g`;
+          const response = await fetch(newUrl);
+          const json = await response.json();
+          return {
+            url: json.data.images.original.url,
+            name: cards[id].character,
+            id: cards[id].id,
+          };
+        })
+      );
+
+      setShowCards(randomCards);
+    }
+    fetchData();
+  }, []);
 
   if (curr == cards.length) {
     alert("You win");
@@ -24,7 +48,7 @@ function Cards() {
     return Math.floor(Math.random() * max);
   }
 
-  function getXRandom(cards) {
+  function shuffleCards(cards) {
     for (let i = 0; i < 4; i++) {
       let randomIndex = getRandomInt(cards.length);
       while (currArray.includes(randomIndex)) {
@@ -35,27 +59,15 @@ function Cards() {
 
     if (
       curr != cards.length &&
-      !currArray.some((item) => !selected.includes(item))
+      !currArray.some((item) => !selected.includes(item.id))
     ) {
       alert("s");
       let randomIndex = getRandomInt(cards.length);
       while (selected.includes(randomIndex)) {
         randomIndex = getRandomInt(cards.length);
       }
-      currArray[getRandomInt(4)] = cards[randomIndex].id;
+      currArray[getRandomInt(4)] = randomIndex;
     }
-    return (
-      <>
-        {currArray.map((id) => {
-          return (
-            <div onClick={() => handleClick(cards[id])} key={id}>
-              {id}
-              {cards[id].character}
-            </div>
-          );
-        })}
-      </>
-    );
   }
 
   function handleClick(card) {
@@ -70,24 +82,24 @@ function Cards() {
       }
     }
   }
-  getXRandom(cards);
+
   return (
     <div>
       <div>Best Score: {best}</div>
       <div>Current Score: {curr}</div>
       {
         <>
-          {currArray.map((id) => {
+          {showCards.map((card) => {
             return (
-              <div onClick={() => handleClick(cards[id])} key={id}>
-                {id}
-                {cards[id].character}
+              <div key={card.id} onClick={() => handleClick(card.id)}>
+                {card.name}
+
+                <img src={card.url} alt="" />
               </div>
             );
           })}
         </>
       }
-      <div></div>
     </div>
   );
 }

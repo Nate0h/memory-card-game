@@ -7,6 +7,8 @@ function Images() {
   const [imageUrl, setImageUrl] = useState("");
   const [imageUrlList, setImageUrlList] = useState([]);
   let url = `https://api.giphy.com/v1/gifs/bLy8cwoobMGx1uDHkO?api_key=sqn6kfwMf3k9Lc9yoWZBsHkh8VHHDQ9E&rating=g`;
+  const currArray = [];
+
   const images = [
     { id: 0, character: "Goku", endPoint: "bLy8cwoobMGx1uDHkO" },
     { id: 1, character: "Vegeta", endPoint: "bLy8cwoobMGx1uDHkO" },
@@ -16,14 +18,21 @@ function Images() {
     { id: 5, character: "Krillin", endPoint: "bLy8cwoobMGx1uDHkO" },
   ];
 
+  shuffleCards(images);
+  alert(currArray.length);
+
   useEffect(() => {
     async function fetchData() {
       let randomUrls = await Promise.all(
-        images.map(async (image) => {
-          let newUrl = `https://api.giphy.com/v1/gifs/${image.endPoint}?api_key=sqn6kfwMf3k9Lc9yoWZBsHkh8VHHDQ9E&rating=g`;
+        currArray.map(async (id) => {
+          let newUrl = `https://api.giphy.com/v1/gifs/${images[id].endPoint}?api_key=sqn6kfwMf3k9Lc9yoWZBsHkh8VHHDQ9E&rating=g`;
           const response = await fetch(newUrl);
           const json = await response.json();
-          return json.data.images.original.url;
+          return {
+            url: json.data.images.original.url,
+            name: images[id].character,
+            id: images[id].id,
+          };
         })
       );
 
@@ -31,9 +40,30 @@ function Images() {
     }
     fetchData();
   }, []);
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+  function shuffleCards(images) {
+    for (let i = 0; i < 4; i++) {
+      let randomIndex = getRandomInt(images.length);
+      while (currArray.includes(randomIndex)) {
+        randomIndex = getRandomInt(images.length);
+      }
+      currArray.push(randomIndex);
+    }
+  }
   return (
     <>
-      <img src={imageUrlList[5]} alt="" />
+      {imageUrlList.map((image) => {
+        return (
+          <div key={image.id}>
+            <div>{image.name}</div>
+            <img src={image.url} alt="" />
+          </div>
+        );
+      })}
     </>
   );
 }
