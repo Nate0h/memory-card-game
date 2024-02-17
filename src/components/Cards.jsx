@@ -16,13 +16,12 @@ function Cards() {
   const [best, setBest] = useState(0);
   const [selected, setSelected] = useState([]);
   const [showCards, setShowCards] = useState([]);
-
+  shuffleCards(cards);
   useEffect(() => {
-    shuffleCards(cards);
     async function fetchData() {
       let randomCards = await Promise.all(
         currArray.map(async (id) => {
-          let newUrl = `https://api.giphy.com/v1/gifs/${cards[id].endPoint}?api_key=${apiKey}&rating=g`;
+          let newUrl = `https://api.giphy.com/v1/gifs/${cards[id].endPoint}?api_key=sqn6kfwMf3k9Lc9yoWZBsHkh8VHHDQ9E&rating=g`;
           const response = await fetch(newUrl);
           const json = await response.json();
           return {
