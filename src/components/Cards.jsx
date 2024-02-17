@@ -70,21 +70,24 @@ function Cards() {
       }
     }
   }
+  getXRandom(cards);
   return (
     <div>
       <div>Best Score: {best}</div>
       <div>Current Score: {curr}</div>
-      {getXRandom(cards)}
+      {
+        <>
+          {currArray.map((id) => {
+            return (
+              <div onClick={() => handleClick(cards[id])} key={id}>
+                {id}
+                {cards[id].character}
+              </div>
+            );
+          })}
+        </>
+      }
       <div></div>
-
-      {selected.map((select) => {
-        return (
-          <div key={cards[select].id}>
-            <div>{cards[select].character}</div>
-            <div>{cards[select].id}</div>
-          </div>
-        );
-      })}
     </div>
   );
 }
