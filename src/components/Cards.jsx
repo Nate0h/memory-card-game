@@ -14,17 +14,18 @@ function Cards() {
     { id: 7, character: "Majin Buu", endPoint: "VJeQrlJLcDsxnknlTP" },
     { id: 8, character: "Master Roshi", endPoint: "JILOx1KJggOGI" },
     { id: 9, character: "Broly", endPoint: "vHgVXgU5SfuSr8Apnb" },
-    { id: 10, character: "Bulma", endPoint: "9HYIrMabdm7ouk" },
-    { id: 11, character: "Krillin", endPoint: "9Jkbi9qi64M1818acD" },
-    { id: 12, character: "Android 18", endPoint: "MHDALD2BOcfja" },
-    { id: 13, character: "Gotenks", endPoint: "g96lpa8OgH1HG" },
+    { id: 10, character: "Krillin", endPoint: "9Jkbi9qi64M1818acD" },
+    { id: 11, character: "Android 18", endPoint: "MHDALD2BOcfja" },
+    { id: 12, character: "Gotenks", endPoint: "g96lpa8OgH1HG" },
   ];
+
   const currArray = [];
   const [curr, setCurr] = useState(0);
   const [best, setBest] = useState(0);
   const [selected, setSelected] = useState([]);
   const [showCards, setShowCards] = useState([]);
   shuffleCards(cards);
+
   useEffect(() => {
     async function fetchData() {
       let randomCards = await Promise.all(
