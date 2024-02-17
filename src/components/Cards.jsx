@@ -4,12 +4,20 @@ function Cards() {
   const apiKey = "sqn6kfwMf3k9Lc9yoWZBsHkh8VHHDQ9E";
 
   const cards = [
-    { id: 0, character: "Goku", endPoint: "bLy8cwoobMGx1uDHkO" },
-    { id: 1, character: "Vegeta", endPoint: "bLy8cwoobMGx1uDHkO" },
-    { id: 2, character: "Gohan", endPoint: "bLy8cwoobMGx1uDHkO" },
-    { id: 3, character: "Trunks", endPoint: "bLy8cwoobMGx1uDHkO" },
-    { id: 4, character: "Piccolo", endPoint: "bLy8cwoobMGx1uDHkO" },
-    { id: 5, character: "Krillin", endPoint: "bLy8cwoobMGx1uDHkO" },
+    { id: 0, character: "Goku", endPoint: "GRSnxyhJnPsaQy9YLn" },
+    { id: 1, character: "Vegeta", endPoint: "5Uwh7Ldfm5aYU" },
+    { id: 2, character: "Gohan", endPoint: "ki6vcWVCkGscU" },
+    { id: 3, character: "Trunks", endPoint: "8bS2vbeZ3hEuk" },
+    { id: 4, character: "Piccolo", endPoint: "h9J38OEA8IrAY" },
+    { id: 5, character: "Frieza", endPoint: "YX1rsNMnDvjna" },
+    { id: 6, character: "Cell", endPoint: "g7QTevVU3gudiKGMpU" },
+    { id: 7, character: "Majin Buu", endPoint: "VJeQrlJLcDsxnknlTP" },
+    { id: 8, character: "Master Roshi", endPoint: "JILOx1KJggOGI" },
+    { id: 9, character: "Broly", endPoint: "vHgVXgU5SfuSr8Apnb" },
+    { id: 10, character: "Bulma", endPoint: "9HYIrMabdm7ouk" },
+    { id: 11, character: "Krillin", endPoint: "9Jkbi9qi64M1818acD" },
+    { id: 12, character: "Android 18", endPoint: "MHDALD2BOcfja" },
+    { id: 13, character: "Gotenks", endPoint: "g96lpa8OgH1HG" },
   ];
   const currArray = [];
   const [curr, setCurr] = useState(0);
@@ -48,7 +56,7 @@ function Cards() {
   }
 
   function shuffleCards(cards) {
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 8; i++) {
       let randomIndex = getRandomInt(cards.length);
       while (currArray.includes(randomIndex)) {
         randomIndex = getRandomInt(cards.length);
@@ -60,12 +68,11 @@ function Cards() {
       curr != cards.length &&
       !currArray.some((item) => !selected.includes(item.id))
     ) {
-      alert("s");
       let randomIndex = getRandomInt(cards.length);
       while (selected.includes(randomIndex)) {
         randomIndex = getRandomInt(cards.length);
       }
-      currArray[getRandomInt(4)] = randomIndex;
+      currArray[getRandomInt(14)] = randomIndex;
     }
   }
 

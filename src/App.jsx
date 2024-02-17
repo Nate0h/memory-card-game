@@ -6,15 +6,11 @@ import "./App.css";
 
 function App() {
   const [count, setCount] = useState(0);
-  const difficulty = useState(false);
   const [start, setStart] = useState(false);
   let startGame;
   if (start) {
     startGame = (
       <>
-        <button>Easy</button>
-        <button>Medium</button>
-        <button>Hard</button>
         <Cards />
       </>
     );
