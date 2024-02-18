@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import "../styles/Cards.css";
 function Cards() {
   const apiKey = "sqn6kfwMf3k9Lc9yoWZBsHkh8VHHDQ9E";
 
