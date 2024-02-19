@@ -68,13 +68,13 @@ function Cards() {
 
     if (
       curr != cards.length &&
-      !currArray.some((item) => !selected.includes(item.id))
+      !currArray.some((item) => !selected.includes(item))
     ) {
       let randomIndex = getRandomInt(cards.length);
       while (selected.includes(randomIndex)) {
         randomIndex = getRandomInt(cards.length);
       }
-      currArray[getRandomInt(14)] = randomIndex;
+      currArray[getRandomInt(8)] = randomIndex;
     }
   }
 
