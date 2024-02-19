@@ -96,17 +96,21 @@ function Cards() {
       <div>Best Score: {best}</div>
       <div>Current Score: {curr}</div>
       {
-        <>
+        <div className="cardsContainer">
           {showCards.map((card) => {
             return (
-              <div key={card.id} onClick={() => handleClick(card)}>
+              <div
+                className="card"
+                key={card.id}
+                onClick={() => handleClick(card)}
+              >
                 <div>{card.name}</div>
 
                 <img src={card.url} alt="" />
               </div>
             );
           })}
-        </>
+        </div>
       }
     </div>
   );

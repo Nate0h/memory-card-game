@@ -19,9 +19,11 @@ function App() {
 
   return (
     <>
-      <div>
-        <img src={dbz} style={{ width: "600px", height: "auto" }} alt="" />
-      </div>
+      {!start && (
+        <div>
+          <img src={dbz} style={{ width: "600px", height: "auto" }} alt="" />
+        </div>
+      )}
       {!start && (
         <div>
           <div className="introText">
