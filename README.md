@@ -18,22 +18,5 @@ Lastly I had a handle click function that was linked to every Card element on di
 
 ### Implementation Challenges
 
-#### 1. Card Navigation:
-   - Implemented a Route in App.jsx to direct users from the main shopping page to a single item page. Each card component on the shopping page is linked to the single item page, with the Card.id used to retrieve specific item data from the API.
-
-#### 2. Search Functionality:
-   - Developed a search functionality on the main shopping page using the filter function against product titles. The search bar allows users to filter products based on their input, dynamically updating the displayed items.
-
-### Future Enhancements
-
-- **User Authentication:**
-  - Implement user authentication to personalize the shopping experience, allowing users to track their order history and save preferences.
-
-- **Responsive Design:**
-  - Enhance the application's responsiveness for a seamless experience across various devices.
-
-- **Product Reviews:**
-  - Integrate a review system to allow users to provide feedback on purchased items, enhancing product transparency.
-
-Feel free to explore the [live demo](https://quickkartnc.netlify.app) and experience the seamless shopping journey with Quick Kart!
+The difficult part about this project was getting the shuffle function to work properly. The difficulty lied in the fact that the cards needed to be shuffled and include at least one card that was not clicked before. I used the selected array to keep track of all the elements that were already chosen, and then after randomly generating 8 cards to display I use the some funcation on the currArray to determine if there was at least one elements that was not in the selected array, if all there was at least one item that was not selected in the array the function would continue, however if all the cards selected were selected before then the program would generate an id that was not chosen at replace an item in the array. 
 
